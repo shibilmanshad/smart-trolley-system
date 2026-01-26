@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Trolley - Barcode</title>
+    <script>
+        function refreshBill() {
+            fetch('/bill_data')
+            .then(res => res.json())
+            .then(data => {
+                let tbody = document.getElementById("bill-body");
+                tbody.innerHTML = "";
+
+                data.items.forEach(item => {
+                    let row = `
+                        <tr>
+                            <td>${item.product_id}</td>
+                            <td>${item.name}</td>
+                            <td>${item.category}</td>
+                            <td>${item.qty}</td>
+                            <td>₹${item.price}</td>
+                            <td>₹${item.subtotal}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+
+                document.getElementById("total").innerText = "₹" + data.total;
+                document.getElementById("current-budget").innerText = "₹" + data.budget;
+
+                if (data.budget > 0 && data.total >= data.budget) {
+                    document.getElementById("warning").style.display = "block";
+                } else {
+                    document.getElementById("warning").style.display = "none";
+                }
+            });
+        }
+
+        setInterval(refreshBill, 1500);
+
+        // Beep sound when total changes
+        let lastTotal = 0;
+        function checkBeep() {
+            fetch('/bill_data')
+            .then(res => res.json())
+            .then(data => {
+                if (data.total > lastTotal) {
+                    document.getElementById("beep").play();
+                    lastTotal = data.total;
+                }
+            });
+        }
+
+        setInterval(checkBeep, 1500);
+
+        function resetBill() {
+            fetch('/reset').then(() => location.reload());
+        }
+    </script>
+</head>
+<body>
+    <h1>🛒 Smart Trolley System (Barcode)</h1>
+
+    <!-- Budget Input -->
+    <h2>Set Budget</h2>
+    <form method="POST">
+        <input type="number" name="budget" placeholder="Enter Budget (e.g. 5000)" required>
+        <button type="submit">Set Budget</button>
+    </form>
+
+    <h3>Current Budget: <span id="current-budget">₹{{ budget }}</span></h3>
+
+    <button onclick="resetBill()">Reset Bill</button>
+
+    <hr>
+
+    <img src="{{ url_for('video') }}" width="700">
+
+    <h2>🧾 Bill Preview</h2>
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="bill-body"></tbody>
+    </table>
+
+    <h2>Total: <span id="total">₹{{ total }}</span></h2>
+
+    <h2 id="warning" style="color:red; display:none;">
+        ⚠ Budget Limit Reached!
+    </h2>
+
+    <audio id="beep" src="{{ url_for('static', filename='beep.mp3') }}"></audio>
+</body>
+</html>

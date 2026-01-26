@@ -1,0 +1,121 @@
+product_id,name,category,price
+P1001,Milk,Dairy,97
+P1002,Milk,Dairy,69
+P1003,Milk,Dairy,23
+P1004,Milk,Dairy,225
+P1005,Cheese,Dairy,45
+P1006,Cheese,Dairy,135
+P1007,Cheese,Dairy,29
+P1008,Cheese,Dairy,63
+P1009,Butter,Dairy,154
+P1010,Butter,Dairy,176
+P1011,Butter,Dairy,183
+P1012,Butter,Dairy,98
+P1013,Curd,Dairy,213
+P1014,Curd,Dairy,121
+P1015,Curd,Dairy,27
+P1016,Curd,Dairy,216
+P1017,Cream,Dairy,239
+P1018,Cream,Dairy,183
+P1019,Cream,Dairy,103
+P1020,Cream,Dairy,100
+P1021,Bread,Bakery,70
+P1022,Bread,Bakery,165
+P1023,Bread,Bakery,124
+P1024,Bread,Bakery,29
+P1025,Bun,Bakery,193
+P1026,Bun,Bakery,185
+P1027,Bun,Bakery,227
+P1028,Bun,Bakery,57
+P1029,Cake,Bakery,121
+P1030,Cake,Bakery,234
+P1031,Cake,Bakery,122
+P1032,Cake,Bakery,33
+P1033,Cookies,Bakery,60
+P1034,Cookies,Bakery,202
+P1035,Cookies,Bakery,112
+P1036,Cookies,Bakery,77
+P1037,Toast,Bakery,147
+P1038,Toast,Bakery,184
+P1039,Toast,Bakery,238
+P1040,Toast,Bakery,182
+P1041,Chips,Snacks,46
+P1042,Chips,Snacks,208
+P1043,Chips,Snacks,67
+P1044,Chips,Snacks,246
+P1045,Biscuit,Snacks,126
+P1046,Biscuit,Snacks,215
+P1047,Biscuit,Snacks,224
+P1048,Biscuit,Snacks,69
+P1049,Namkeen,Snacks,128
+P1050,Namkeen,Snacks,71
+P1051,Namkeen,Snacks,230
+P1052,Namkeen,Snacks,35
+P1053,Popcorn,Snacks,113
+P1054,Popcorn,Snacks,183
+P1055,Popcorn,Snacks,221
+P1056,Popcorn,Snacks,146
+P1057,Choco Bar,Snacks,71
+P1058,Choco Bar,Snacks,113
+P1059,Choco Bar,Snacks,115
+P1060,Choco Bar,Snacks,47
+P1061,Juice,Beverages,59
+P1062,Juice,Beverages,207
+P1063,Juice,Beverages,101
+P1064,Juice,Beverages,42
+P1065,Soda,Beverages,170
+P1066,Soda,Beverages,148
+P1067,Soda,Beverages,191
+P1068,Soda,Beverages,187
+P1069,Water,Beverages,151
+P1070,Water,Beverages,38
+P1071,Water,Beverages,210
+P1072,Water,Beverages,113
+P1073,Energy Drink,Beverages,60
+P1074,Energy Drink,Beverages,158
+P1075,Energy Drink,Beverages,210
+P1076,Energy Drink,Beverages,78
+P1077,Tea,Beverages,159
+P1078,Tea,Beverages,134
+P1079,Tea,Beverages,118
+P1080,Tea,Beverages,247
+P1081,Rice,Groceries,178
+P1082,Rice,Groceries,185
+P1083,Rice,Groceries,111
+P1084,Rice,Groceries,163
+P1085,Sugar,Groceries,219
+P1086,Sugar,Groceries,51
+P1087,Sugar,Groceries,241
+P1088,Sugar,Groceries,77
+P1089,Salt,Groceries,239
+P1090,Salt,Groceries,195
+P1091,Salt,Groceries,215
+P1092,Salt,Groceries,208
+P1093,Wheat Flour,Groceries,246
+P1094,Wheat Flour,Groceries,99
+P1095,Wheat Flour,Groceries,114
+P1096,Wheat Flour,Groceries,224
+P1097,Oil,Groceries,57
+P1098,Oil,Groceries,47
+P1099,Oil,Groceries,120
+P1100,Oil,Groceries,201
+P1101,Soap,Personal Care,21
+P1102,Soap,Personal Care,250
+P1103,Soap,Personal Care,89
+P1104,Soap,Personal Care,57
+P1105,Shampoo,Personal Care,70
+P1106,Shampoo,Personal Care,151
+P1107,Shampoo,Personal Care,118
+P1108,Shampoo,Personal Care,167
+P1109,Toothpaste,Personal Care,197
+P1110,Toothpaste,Personal Care,128
+P1111,Toothpaste,Personal Care,238
+P1112,Toothpaste,Personal Care,241
+P1113,Facewash,Personal Care,123
+P1114,Facewash,Personal Care,130
+P1115,Facewash,Personal Care,111
+P1116,Facewash,Personal Care,234
+P1117,Lotion,Personal Care,160
+P1118,Lotion,Personal Care,232
+P1119,Lotion,Personal Care,95
+P1120,Lotion,Personal Care,206
