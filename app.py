@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, jsonify, request
 import cv2
+import numpy as np
 import pandas as pd
 import time
 import atexit
@@ -97,7 +98,34 @@ def generate_frames():
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
 
         # --------- BARCODE (BILLING) ---------
-        barcodes = decode(frame)
+        # Multi-pass decoding: try several preprocessed versions of the frame
+        # This is essential when scanning barcodes shown on a phone screen
+        # through a laptop camera (glare, angle, low contrast)
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Pass 1: plain grayscale
+        barcodes = decode(gray)
+
+        # Pass 2: sharpened — helps with blurry phone screens
+        if not barcodes:
+            kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+            sharpened = cv2.filter2D(gray, -1, kernel)
+            barcodes = decode(sharpened)
+
+        # Pass 3: adaptive threshold — handles glare and uneven lighting
+        if not barcodes:
+            thresh = cv2.adaptiveThreshold(
+                gray, 255,
+                cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                cv2.THRESH_BINARY, 51, 11
+            )
+            barcodes = decode(thresh)
+
+        # Pass 4: upscaled — helps when barcode is small in frame
+        if not barcodes:
+            upscaled = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+            barcodes = decode(upscaled)
 
         for barcode in barcodes:
             barcode_data = barcode.data.decode("utf-8").strip()
