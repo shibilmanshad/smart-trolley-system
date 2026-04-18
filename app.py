@@ -2,6 +2,8 @@ from flask import Flask, render_template, Response, jsonify, request
 import cv2
 import pandas as pd
 import time
+import atexit
+import os
 from pyzbar.pyzbar import decode
 from ultralytics import YOLO
 
@@ -10,23 +12,40 @@ app = Flask(__name__)
 # =============================
 # LOAD YOLO MODEL (AI MODULE)
 # =============================
-yolo_model = YOLO("runs/detect/smart_trolley_model5/weights/best.pt")
+model_path = "runs/detect/smart_trolley_model5/weights/best.pt"
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"YOLO model not found at: {model_path}")
+
+yolo_model = YOLO(model_path)
 
 # =============================
 # LOAD PRODUCT CSV (BILLING)
+# FIX 1: force product_id as string
+# so "P1109" matches correctly
 # =============================
-products_df = pd.read_csv("ml_products.csv")
+products_df = pd.read_csv("ml_products.csv", dtype={'product_id': str})
 
 # =============================
 # BILL & BUDGET DATA
 # =============================
-bill = {}   # {product_id: qty}
+bill = {}        # { product_id: qty }
 total_amount = 0
 budget_limit = 0
 
+# =============================
+# CAMERA SETUP
+# =============================
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+# FIX 3: release camera cleanly on app exit
+@atexit.register
+def release_camera():
+    cap.release()
+
+if not cap.isOpened():
+    raise RuntimeError("Could not open camera. Check if webcam is connected.")
 
 last_scanned = {}
 SCAN_COOLDOWN = 3  # seconds
@@ -34,8 +53,11 @@ SCAN_COOLDOWN = 3  # seconds
 
 # =============================
 # GET PRODUCT BY PRODUCT_ID
+# FIX 2: strip whitespace & force
+# string so barcode matches CSV
 # =============================
 def get_product_by_id(product_id):
+    product_id = str(product_id).strip()   # ← key fix
     row = products_df[products_df['product_id'] == product_id]
 
     if not row.empty:
@@ -99,7 +121,7 @@ def generate_frames():
             # Draw barcode box
             x, y, w, h = barcode.rect
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            label = f"SCAN: {barcode_data} | {name} ₹{price}"
+            label = f"SCAN: {barcode_data} | {name} Rs.{price}"
             cv2.putText(frame, label, (x, y - 5),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
@@ -182,6 +204,8 @@ def reset_bill():
 
 # =============================
 # START APP
+# FIX 4: debug=False prevents Flask
+# from opening the camera twice
 # =============================
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
