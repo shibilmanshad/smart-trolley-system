@@ -45,11 +45,8 @@
     }
 
     header {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 18px 36px;
       border-bottom: 1px solid var(--border);
       background: rgba(8,12,16,0.9);
@@ -129,15 +126,8 @@
       border-color: var(--accent); border-style: solid; z-index: 2;
     }
 
-    .video-wrapper::before {
-      top: 10px; left: 10px;
-      border-width: 2px 0 0 2px; border-radius: 3px 0 0 0;
-    }
-
-    .video-wrapper::after {
-      bottom: 10px; right: 10px;
-      border-width: 0 2px 2px 0; border-radius: 0 0 3px 0;
-    }
+    .video-wrapper::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; border-radius: 3px 0 0 0; }
+    .video-wrapper::after  { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; border-radius: 0 0 3px 0; }
 
     .cam-badge {
       position: absolute; top: 14px; right: 14px;
@@ -149,10 +139,7 @@
       display: flex; align-items: center; gap: 5px; z-index: 3;
     }
 
-    .rec-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #ff4d6d; animation: pulse 1s infinite;
-    }
+    .rec-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff4d6d; animation: pulse 1s infinite; }
 
     .budget-card {
       background: var(--panel); border: 1px solid var(--border);
@@ -178,10 +165,7 @@
       outline: none; transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .budget-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
-    }
+    .budget-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,229,255,0.1); }
 
     .btn {
       padding: 10px 20px; border: none; border-radius: 8px;
@@ -190,15 +174,9 @@
     }
 
     .btn-primary { background: var(--accent); color: #08090c; }
-
-    .btn-primary:hover {
-      background: #33ecff;
-      box-shadow: 0 0 16px rgba(0,229,255,0.4);
-      transform: translateY(-1px);
-    }
+    .btn-primary:hover { background: #33ecff; box-shadow: 0 0 16px rgba(0,229,255,0.4); transform: translateY(-1px); }
 
     .btn-danger { background: transparent; border: 1px solid var(--warn); color: var(--warn); }
-
     .btn-danger:hover { background: var(--warn); color: white; transform: translateY(-1px); }
 
     .budget-alert {
@@ -207,47 +185,53 @@
       border-radius: 8px; font-size: 0.8rem; color: var(--warn);
       font-family: 'JetBrains Mono', monospace;
     }
-
     .budget-alert.show { display: flex; align-items: center; gap: 8px; }
 
-    .bill-section {
-      display: flex; flex-direction: column;
-      background: var(--surface); overflow: hidden;
+    /* ── SCAN TOAST NOTIFICATION ── */
+    .scan-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--panel);
+      border: 1px solid var(--accent2);
+      border-radius: 12px;
+      padding: 12px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent2);
+      z-index: 200;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,255,136,0.2);
+      white-space: nowrap;
+    }
+    .scan-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
 
-    .bill-header {
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid var(--border); flex-shrink: 0;
-    }
+    .bill-section { display: flex; flex-direction: column; background: var(--surface); overflow: hidden; }
 
-    .bill-header-top {
-      display: flex; align-items: center;
-      justify-content: space-between; margin-bottom: 16px;
-    }
+    .bill-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+
+    .bill-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 
     .item-count {
       font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
-      color: var(--muted); background: var(--tag);
-      padding: 3px 10px; border-radius: 20px;
+      color: var(--muted); background: var(--tag); padding: 3px 10px; border-radius: 20px;
     }
 
     .totals-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-    .total-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 12px 14px;
-    }
+    .total-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
 
     .total-card .label {
       font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
       color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px;
     }
 
-    .total-card .value {
-      font-family: 'JetBrains Mono', monospace; font-size: 1.2rem;
-      font-weight: 600; color: var(--accent);
-    }
-
+    .total-card .value { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 600; color: var(--accent); }
     .total-card.budget .value { color: var(--text); }
     .total-card.over .value { color: var(--warn); }
 
@@ -255,15 +239,13 @@
 
     .budget-bar-labels {
       display: flex; justify-content: space-between;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
-      color: var(--muted); margin-bottom: 5px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-bottom: 5px;
     }
 
     .budget-bar { height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
 
     .budget-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
       border-radius: 10px; transition: width 0.5s ease, background 0.3s; width: 0%;
     }
 
@@ -298,37 +280,25 @@
 
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(10px); }
-      to { opacity: 1; transform: translateX(0); }
+      to   { opacity: 1; transform: translateX(0); }
     }
 
     .item-info { min-width: 0; }
 
-    .item-name {
-      font-size: 0.85rem; font-weight: 600;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px;
-    }
+    .item-name { font-size: 0.85rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
 
     .item-meta { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; }
 
     .item-cat { color: var(--muted); background: var(--tag); padding: 2px 7px; border-radius: 4px; }
-    .item-id { color: var(--muted); }
+    .item-id  { color: var(--muted); }
 
     .item-pricing { text-align: right; flex-shrink: 0; }
 
-    .item-subtotal {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;
-      font-weight: 600; color: var(--accent2);
-    }
+    .item-subtotal { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 600; color: var(--accent2); }
 
-    .item-qty-price {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
-      color: var(--muted); margin-top: 2px;
-    }
+    .item-qty-price { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
 
-    .bill-footer {
-      padding: 16px 24px; border-top: 1px solid var(--border);
-      display: flex; gap: 10px; flex-shrink: 0;
-    }
+    .bill-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 10px; flex-shrink: 0; }
 
     .btn-checkout {
       flex: 1; padding: 12px;
@@ -365,7 +335,7 @@
 
     @keyframes modalIn {
       from { opacity: 0; transform: scale(0.92) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .modal-icon { font-size: 3rem; margin-bottom: 16px; }
@@ -377,6 +347,9 @@
   </style>
 </head>
 <body>
+
+  <!-- SCAN TOAST -->
+  <div class="scan-toast" id="scanToast">✅ Item scanned!</div>
 
   <!-- HEADER -->
   <header>
@@ -457,9 +430,7 @@
       </div>
 
       <!-- ITEMS LIST -->
-      <div class="bill-items" id="billItems">
-        <!-- items injected by JS -->
-      </div>
+      <div class="bill-items" id="billItems"></div>
 
       <!-- FOOTER -->
       <div class="bill-footer">
@@ -484,98 +455,96 @@
   </div>
 
   <script>
-    // ── CLOCK ──
+    // ══════════════════════════════════════════════
+    // CLOCK
+    // ══════════════════════════════════════════════
     function updateClock() {
-      const now = new Date();
       document.getElementById('clock').textContent =
-        now.toLocaleTimeString('en-IN', { hour12: false });
+        new Date().toLocaleTimeString('en-IN', { hour12: false });
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ══════════════════════════════════════
-    // FIX 1: BEEP SOUND
-    // Uses Web Audio API — no file needed,
-    // works in all browsers without autoplay block
-    // ══════════════════════════════════════
-    let audioCtx = null;
 
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // ══════════════════════════════════════════════
+    // BEEP SOUND — using your actual beep.mp3
+    // Pre-loaded so it plays instantly with zero delay
+    // ══════════════════════════════════════════════
+    const beepAudio = new Audio('/static/beep.mp3');
+    beepAudio.preload = 'auto';    // load file immediately on page load
+    beepAudio.volume = 1.0;        // full volume
+
+    // Browsers block audio until a user gesture happens.
+    // We silently "touch" the audio on first click anywhere on the page.
+    let audioUnlocked = false;
+    document.addEventListener('click', function unlockOnce() {
+      if (!audioUnlocked) {
+        // Play then immediately pause — this unlocks the audio context
+        beepAudio.play().then(() => {
+          beepAudio.pause();
+          beepAudio.currentTime = 0;
+          audioUnlocked = true;
+        }).catch(() => {});
       }
-      return audioCtx;
-    }
-
-    function playBeep() {
-      try {
-        const ctx = getAudioContext();
-        const oscillator = ctx.createOscillator();
-        const gainNode = ctx.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(ctx.destination);
-
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(1050, ctx.currentTime);      // beep pitch
-        gainNode.gain.setValueAtTime(0.4, ctx.currentTime);              // volume
-        gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2); // fade out
-
-        oscillator.start(ctx.currentTime);
-        oscillator.stop(ctx.currentTime + 0.2);                          // 200ms beep
-      } catch(e) {
-        console.warn('Beep failed:', e);
-      }
-    }
-
-    // Unlock AudioContext on first user interaction (required by browsers)
-    document.addEventListener('click', function unlockAudio() {
-      getAudioContext();
-      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('click', unlockOnce);
     }, { once: true });
 
+    function playBeep() {
+      // Reset to start so rapid scans each get a fresh beep
+      beepAudio.currentTime = 0;
+      beepAudio.play().catch(e => console.warn('Beep blocked:', e));
+    }
 
-    // ══════════════════════════════════════
-    // FIX 2: BILL POLLING — track previous
-    // state to detect NEW scans & render ALL items
-    // ══════════════════════════════════════
-    let currentBudget = {{ budget }};
 
-    // Track previous item quantities to detect new scans
+    // ══════════════════════════════════════════════
+    // SCAN TOAST  — shows item name on each new scan
+    // ══════════════════════════════════════════════
+    let toastTimer = null;
+    function showToast(itemName) {
+      const toast = document.getElementById('scanToast');
+      toast.textContent = '✅ Scanned: ' + itemName;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+
+    // ══════════════════════════════════════════════
+    // BILL POLLING
+    // Tracks previous qty per product_id so beep only
+    // fires when a genuinely NEW scan happens
+    // ══════════════════════════════════════════════
     let prevItemState = {};   // { product_id: qty }
 
     function updateBill() {
       fetch('/bill_data')
         .then(r => r.json())
         .then(data => {
-          currentBudget = data.budget;
 
-          // ── Detect new/updated scans → play beep ──
-          let newScanDetected = false;
+          // ── Detect new scans ──
           data.items.forEach(item => {
             const prevQty = prevItemState[item.product_id] || 0;
             if (item.qty > prevQty) {
-              newScanDetected = true;
+              playBeep();
+              showToast(item.name);
             }
             prevItemState[item.product_id] = item.qty;
           });
 
-          if (newScanDetected) playBeep();
-
-          // ── Update totals ──
+          // ── Totals ──
           document.getElementById('totalDisplay').textContent = '₹' + data.total;
           document.getElementById('budgetDisplay').textContent =
             data.budget > 0 ? '₹' + data.budget : '—';
-          document.getElementById('modalTotal').textContent = '₹' + data.total;
+          document.getElementById('modalTotal').textContent  = '₹' + data.total;
           document.getElementById('budgetBarLabel').textContent =
             data.budget > 0 ? '₹' + data.budget : '—';
 
-          // ── Item count ──
-          const totalQty = data.items.reduce((sum, i) => sum + i.qty, 0);
+          // ── Item count (total quantity, not unique products) ──
+          const totalQty = data.items.reduce((s, i) => s + i.qty, 0);
           document.getElementById('itemCount').textContent =
             totalQty + (totalQty === 1 ? ' item' : ' items');
 
-          // ── Budget bar ──
+          // ── Budget progress bar ──
           const fill = document.getElementById('budgetBarFill');
           if (data.budget > 0) {
             const pct = Math.min((data.total / data.budget) * 100, 100);
@@ -587,27 +556,23 @@
 
           // ── Budget alert ──
           const alertEl = document.getElementById('budgetAlert');
-          if (data.budget > 0 && data.total > data.budget) {
-            alertEl.classList.add('show');
-          } else {
-            alertEl.classList.remove('show');
-          }
+          alertEl.classList.toggle('show', data.budget > 0 && data.total > data.budget);
 
-          // ── Render bill items (ALL of them) ──
+          // ── Render ALL bill items ──
           const container = document.getElementById('billItems');
 
           if (data.items.length === 0) {
-            // Show empty state
             container.innerHTML = `
               <div class="empty-state">
                 <div class="empty-icon">🔍</div>
                 <div>Scan a product to start billing</div>
-                <div style="color: var(--border); margin-top: 4px;">Point barcode at camera</div>
+                <div style="color:var(--border);margin-top:4px;">Point barcode at camera</div>
               </div>`;
             return;
           }
 
-          // Render ALL scanned items
+          // Rebuild full list on every poll
+          // (safe because polling is every 1.5s — no flicker)
           container.innerHTML = data.items.map(item => `
             <div class="bill-item">
               <div class="item-info">
@@ -627,17 +592,22 @@
         .catch(() => {});
     }
 
-    // Poll every 1.5 seconds
     setInterval(updateBill, 1500);
     updateBill();
 
-    // ── RESET ──
+
+    // ══════════════════════════════════════════════
+    // RESET
+    // ══════════════════════════════════════════════
     function resetBill() {
-      prevItemState = {};   // clear tracking on reset
+      prevItemState = {};
       fetch('/reset').then(() => updateBill());
     }
 
-    // ── CHECKOUT MODAL ──
+
+    // ══════════════════════════════════════════════
+    // CHECKOUT MODAL
+    // ══════════════════════════════════════════════
     function showCheckout() {
       document.getElementById('checkoutModal').classList.add('show');
     }
